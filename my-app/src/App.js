@@ -5,6 +5,7 @@ import Home from './component/home';
 import About from './component/about';
 import Greeting from './component/greeting';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import DataTable from './component/table';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/about' element={<About />}/>
         <Route path='/greeting' element={<Greeting />}/>
+        <Route path='/table' element={<DataTable />}/>
 
         
       </Routes>

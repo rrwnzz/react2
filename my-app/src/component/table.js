@@ -2,6 +2,11 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import {useState} from 'react' ;
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -36,8 +41,21 @@ const rows = [
 ];
 
 const paginationModel = { page: 0, pageSize: 5 };
-
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 export default function DataTable() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [userData, setUserData] = useState(
     [
       { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -65,7 +83,7 @@ export default function DataTable() {
       // {/* /> */}
       <form onSubmit={(event)=>{
         event.preventDefault();
-        setUserData([...userData,{id:10, firstName:firstName, lastName:lastName, age:age}])
+        setUserData([...userData,{id:userData.length+1, firstName:firstName, lastName:lastName, age:age}])
       }}>
         <input onChange={(event)=>{
           setFirstName(event.target.value);
@@ -85,6 +103,8 @@ export default function DataTable() {
             <td>First Name</td>
             <td>Last Name</td>
             <td>Age</td>
+            <td>Delete</td>
+            <td>Upadte</td>
           </tr>
         </thead>
         <tbody>
@@ -95,12 +115,26 @@ export default function DataTable() {
                 <td>{user.firstName}</td>
                 <td>{user. lastName}</td>
                 <td>{user.age}</td>
-              </tr>
-
-            )
-          })}
+                <td>
+                  <button onClick={()=>{
+                    if(window.confirm('are you sure you want to delete this user?')){
+                      console.log('the user wants to delete the row')
+                      console.log('user.id',user.id)
+                      const newUserdata = userData.filter((item)=>{
+                        return item.id !== user.id;
+                      })
+                      console.log(newUserdata)
+                      setUserData(newUserdata)
+                    }
+                    else{
+                      console.log('the user dont want to delete the row')
+                    }
+                  }}>Delete</button>
+          </td>
+          </tr>
+          )})}
         </tbody>
-      </table>
-    </Paper>
-  );
-}
+        </table>
+        </Paper>
+
+)}

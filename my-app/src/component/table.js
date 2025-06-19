@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-
-
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'firstName', headerName: 'First name', width: 130 },
@@ -104,7 +102,7 @@ export default function DataTable() {
             <td>Last Name</td>
             <td>Age</td>
             <td>Delete</td>
-            <td>Upadte</td>
+            <td>Update</td>
           </tr>
         </thead>
         <tbody>
@@ -130,11 +128,38 @@ export default function DataTable() {
                       console.log('the user dont want to delete the row')
                     }
                   }}>Delete</button>
-          </td>
-          </tr>
+                </td>
+                <td><button onClick={()=>{
+                  setFirstName(user.firstName);
+                  setLastName(user.lastName);
+                  setAge(user.age);
+                  handleOpen();
+                }}>Update</button></td>
+              </tr>
           )})}
         </tbody>
         </table>
+        <div>
+          {/* <Button onClick={handleOpen}>Open modal</Button> */}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <form>
+                <input value={firstName} onChange={(event)=>{
+                }} type='text' placeholder='enter your first name'></input>
+                <input value={lastName} onChange={(event)=>{
+                }} type='text' placeholder='enter your last name'></input>
+                <input value={age} onChange={(event)=>{
+                }} type='number' placeholder='enter your age'></input>
+                <input type='submit'></input>
+              </form>
+            </Box>
+          </Modal>
+        </div>
         </Paper>
 
 )}

@@ -81,7 +81,23 @@ export default function DataTable() {
       // {/* /> */}
       <form onSubmit={(event)=>{
         event.preventDefault();
-        setUserData([...userData,{id:userData.length+1, firstName:firstName, lastName:lastName, age:age}])
+        var heightestId=0
+        var ids=[];
+        for (let i=0;i<userData.length;i++){
+          const currentId=userData[i].id;
+          ids.push(currentId)
+          if(currentId>heightestId){
+            heightestId=currentId
+          }
+        }
+        let newId=1
+        for (;newId<=heightestId;newId++){
+          if(!ids.includes(newId)){
+            break
+          }
+        }
+      
+        setUserData([...userData,{id:newId, firstName:firstName, lastName:lastName, age:age}])
       }}>
         <input onChange={(event)=>{
           setFirstName(event.target.value);

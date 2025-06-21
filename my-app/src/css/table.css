@@ -1,0 +1,41 @@
+#headStyle{
+    color:blue;
+}
+
+#tdStyle:hover{
+    background-color: aqua;
+    transform: scale(1.05); 
+    transition: all 0.3s ease-in-out;
+}
+#tbodyStyle{
+    color: blue;
+}
+#buttonStyle{
+    border: 1px solid blue;
+    background-color: white;
+    
+    
+}
+#tableStyle{
+    margin-top: 20px;
+    margin-left: 450px;
+    border: 1px solid black;
+    
+}
+#inputStyle{
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid blue;
+    
+}
+#formStyle{
+    margin-left: 300px;
+}
+#tdStyle{
+    padding: 3px;
+}
+
+.trStyle2 {
+  background-color: lightblue;
+}
+

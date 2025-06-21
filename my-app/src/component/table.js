@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import '../css/table.css'
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'firstName', headerName: 'First name', width: 130 },
@@ -68,6 +69,7 @@ export default function DataTable() {
     ]);
     const [firstName, setFirstName]=useState('');
     const [lastName, setLastName]=useState('');
+    const [idToUpdate, setIdToUpadte]=useState(0);
     const [age, setAge]=useState(0);
   return (
     <Paper sx={{ height: 400, width: '100%' }}>
@@ -79,7 +81,7 @@ export default function DataTable() {
         checkboxSelection
         sx={{ border: 0 }}
       // {/* /> */}
-      <form onSubmit={(event)=>{
+      <form id='formStyle' onSubmit={(event)=>{
         event.preventDefault();
         var heightestId=0
         var ids=[];
@@ -99,38 +101,38 @@ export default function DataTable() {
       
         setUserData([...userData,{id:newId, firstName:firstName, lastName:lastName, age:age}])
       }}>
-        <input onChange={(event)=>{
+        <input id='inputStyle' onChange={(event)=>{
           setFirstName(event.target.value);
         }} type='text' placeholder='enter your first name'></input>
-        <input onChange={(event)=>{
+        <input id='inputStyle' onChange={(event)=>{
           setLastName(event.target.value)
         }} type='text' placeholder='enter your last name'></input>
-        <input onChange={(event)=>{
+        <input id='inputStyle' onChange={(event)=>{
           setAge(event.target.value)
         }} type='number' placeholder='enter your age'></input>
         <input type='submit'></input>
       </form>
-      <table border={1}>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Age</td>
-            <td>Delete</td>
-            <td>Update</td>
+      <table id='tableStyle'>
+        <thead id='headStyle'>
+          <tr id='trStyle'>
+            <td id='tdStyle'>ID</td>
+            <td id='tdStyle'>First Name</td>
+            <td id='tdStyle'>Last Name</td>
+            <td id='tdStyle'>Age</td>
+            <td id='tdStyle'>Delete</td>
+            <td id='tdStyle'>Update</td>
           </tr>
         </thead>
-        <tbody>
+        <tbody id='tbodyStyle'>
           {userData.map((user,index)=>{
             return(
-              <tr>
-                <td>{user.id}</td>
-                <td>{user.firstName}</td>
-                <td>{user. lastName}</td>
-                <td>{user.age}</td>
-                <td>
-                  <button onClick={()=>{
+              <tr className='trStyle2'>
+                <td id='tdStyle'>{user.id}</td>
+                <td id='tdStyle'>{user.firstName}</td>
+                <td id='tdStyle'>{user. lastName}</td>
+                <td id='tdStyle'>{user.age}</td>
+                <td id='tdStyle'>
+                  <button id='buttonStyle' onClick={()=>{
                     if(window.confirm('are you sure you want to delete this user?')){
                       console.log('the user wants to delete the row')
                       console.log('user.id',user.id)
@@ -145,10 +147,11 @@ export default function DataTable() {
                     }
                   }}>Delete</button>
                 </td>
-                <td><button onClick={()=>{
+                <td id='tdStyle'><button id='buttonStyle' onClick={()=>{
                   setFirstName(user.firstName);
                   setLastName(user.lastName);
                   setAge(user.age);
+                  setIdToUpadte(user.id);
                   handleOpen();
                 }}>Update</button></td>
               </tr>
@@ -164,12 +167,33 @@ export default function DataTable() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <form>
-                <input value={firstName} onChange={(event)=>{
+              <form onSubmit={(e)=>{
+                e.preventDefault()
+                console.log('you want to delete the user with the id',idToUpdate);
+                userData.forEach(
+                  (user,index)=>{
+                    if(user.id===idToUpdate){
+                      console.log('user before update',user);
+                      user.firstName=firstName;
+                      user.lastName=lastName;
+                      user.age=age;
+                      console.log('user aftet update',user);
+                      const newUserData = [...userData];
+                      newUserData[index]=user;
+                      setUserData(newUserData);
+                      handleClose();
+                    }
+                  }
+                )
+              }}>
+                <input id='inputStyle' value={firstName} onChange={(event)=>{
+                  setFirstName(event.target.value);
                 }} type='text' placeholder='enter your first name'></input>
-                <input value={lastName} onChange={(event)=>{
+                <input id='inputStyle' value={lastName} onChange={(event)=>{
+                  setLastName(event.target.value)
                 }} type='text' placeholder='enter your last name'></input>
-                <input value={age} onChange={(event)=>{
+                <input id='inputStyle' value={age} onChange={(event)=>{
+                  setAge(event.target.value)
                 }} type='number' placeholder='enter your age'></input>
                 <input type='submit'></input>
               </form>

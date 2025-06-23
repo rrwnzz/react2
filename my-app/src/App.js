@@ -6,6 +6,9 @@ import About from './component/about';
 import Greeting from './component/greeting';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import DataTable from './component/table';
+import DataTable2 from './component/tableMui';
+
+
 
 
 function App() {
@@ -17,6 +20,10 @@ function App() {
         <Route path='/about' element={<About />}/>
         <Route path='/greeting' element={<Greeting />}/>
         <Route path='/table' element={<DataTable />}/>
+        <Route path='/tableMui' element={<DataTable2 />}/>
+
+       
+
 
         
       </Routes>

@@ -35,6 +35,9 @@ export default function ButtonAppBar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <Link className='navLink' to='/table'>DataTable</Link>
             </Typography>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Link className='navLink' to='/tableMui'>DataTable2</Link>
+            </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

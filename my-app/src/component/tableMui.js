@@ -118,7 +118,7 @@ export default function DataTable2() {
                 setFirstName(user.firstName);
                 setLastName(user.lastName);
                 setAge(user.age);
-                setIdToUpadte(user.id);m
+                setIdToUpadte(user.id);
                 // setFullName(user.fullName);
                 handleOpen();
               }}>Update</button>

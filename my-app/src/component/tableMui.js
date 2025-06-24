@@ -79,6 +79,7 @@ export default function DataTable2() {
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState(0);
     const [fullName, setFullName] = useState('');
+    const [idToUpdate, setIdToUpadte]=useState(0);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -103,19 +104,32 @@ export default function DataTable2() {
             <input type='submit'></input>
         </form>
         {userData.map((user,index)=>{
-            return(
-                <button onClick={()=>{
-                    if(window.confirm('are you want to delete this user')){
-                        const newUserdata= userData.filter((item)=>{
-                            return item.id !== user.id
-                        })
-                        setUserData(newUserdata)
-                    }
-                }}>Delete</button>
-            )
+          return(
+            <div>
+              <button onClick={()=>{
+                if(window.confirm('are you want to delete this user')){
+                  const newUserdata = userData.filter((item)=>{
+                    return item.id !== user.id
+                  })
+                  setUserData(newUserdata)
+                }
+              }}>Delete</button>
+              <button onClick={()=>{
+                setFirstName(user.firstName);
+                setLastName(user.lastName);
+                setAge(user.age);
+                setIdToUpadte(user.id);
+                // setFullName(user.fullName);
+                handleOpen();
+              }}>Update</button>
+            </div>
+          )
         })}
+
+       
+     
         <div>
-      `    <Button onClick={handleOpen}>Open modal</Button>
+      {/* `    <Button onClick={handleOpen}>Open modal</Button> */}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -123,12 +137,36 @@ export default function DataTable2() {
                 aria-describedby="modal-modal-description"
             >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                 Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </Typography>
+              <form onSubmit={(e)=>{
+                e.preventDefault();
+                userData.forEach(
+                  (user,index)=>{
+                    if(user.id===idToUpdate){
+                      user.firstName=firstName
+                      user.lastName=lastName
+                      user.age=age
+                      const newUserData=[...userData]
+                      newUserData[index]=user
+                      setUserData(newUserData)
+                      handleClose()
+                    }
+                  }
+                )
+              }}>
+                <input value={firstName} onChange={(e)=>{
+                  setFirstName(e.target.value)
+                }} type='text' placeholder='first name'></input>
+                <input value={lastName} onChange={(e)=>{
+                  setLastName(e.target.value)
+                }} type='text' placeholder='last name'></input>
+                <input value={age} onChange={(e)=>{
+                  setAge(e.target.value)
+                }} type='number' placeholder='age'></input>
+                {/* <input value={fullName} onChange={(e)=>{ */}
+                  {/* setFullName(e.target.value) */}
+                {/* }} type='text' placeholder='full name' ></input> */}
+                <input type='submit'></input>
+              </form>
             </Box>
         </Modal>
     </div>

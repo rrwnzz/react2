@@ -23,7 +23,7 @@ export default function RefNew() {
         }
         setErrors(newErrors);
         if(newErrors.username){
-            userNameRef.current.focus();
+            userNameRef.current.focus(); 
         }
         if(newErrors.password){
             passwordRef.current.focus();

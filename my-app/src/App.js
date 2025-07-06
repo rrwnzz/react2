@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import DataTable from './component/table';
 import DataTable2 from './component/tableMui';
 import RefNew from './component/ref';
+import SearchAppBar from './component/nav2';
 
 
 
@@ -23,6 +24,8 @@ function App() {
         <Route path='/table' element={<DataTable />}/>
         <Route path='/tableMui' element={<DataTable2 />}/>
         <Route path='/ref' element={<RefNew/>}/>
+        <Route path='/nav2' element={<SearchAppBar/>}/>
+        
 
        
 

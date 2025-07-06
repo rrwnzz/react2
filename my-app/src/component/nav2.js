@@ -73,6 +73,9 @@ export default function SearchAppBar() {
           >
             MUI
           </Typography>
+           <Typography sx={{marginRight:'2%'}}>Courses</Typography>
+           <Typography sx={{marginRight:'2%'}}>About Us</Typography>
+           <Typography sx={{marginRight:'2%'}}>Blog</Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
